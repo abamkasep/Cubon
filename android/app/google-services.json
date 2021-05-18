@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "408759284596",
+    "project_id": "cucuabon",
+    "storage_bucket": "cucuabon.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:408759284596:android:663f1087f61bd51997f221",
+        "android_client_info": {
+          "package_name": "com.cubon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "408759284596-mnl4a1sm6jcl8kuj5gud9lqa799u42eh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNYq7O6q0Sy7q9bfPePR1MfjutfmYXAxY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "408759284596-mnl4a1sm6jcl8kuj5gud9lqa799u42eh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
