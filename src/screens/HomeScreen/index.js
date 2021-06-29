@@ -11,6 +11,7 @@ import {
   Dimensions,
   StatusBar,
   TouchableOpacity,
+  FlatList,
 } from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
@@ -30,33 +31,19 @@ import {
 } from '../../assets/styles/BerandaStyles';
 import * as Animatable from 'react-native-animatable';
 
-import {windowWidth} from '../../utils/Dimentions';
+import {windowWidth, windowHeight} from '../../utils/Dimentions';
 
 import ProdukCard from '../../components/ProdukCard';
 import TransaksiCard from '../../components/TransaksiCard';
+import renderContent from '../../components/BottomSheet';
+
+import dataTransaksi from '../../model/dataTransaksi';
+import dataProduk from '../../model/dataProduk';
 
 const HomeScreen = ({navigation}) => {
   const {colors} = useTheme();
-
   const theme = useTheme();
-
-  const renderContent = () => (
-    <View
-      style={{
-        backgroundColor: 'white',
-        padding: 5,
-        height: 190,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: 'orange',
-        alignItems: 'center',
-      }}>
-      <Text>Swipe down to close</Text>
-    </View>
-  );
-
   const sheetRef = React.useRef(null);
-
   return (
     <Container>
       <ScrollView vertical style={{flex: 1}}>
@@ -71,13 +58,14 @@ const HomeScreen = ({navigation}) => {
         </MonthlyCardWrapper>
 
         <Animatable.View animation="fadeInUpBig">
-          <DailyCardWrapper>
+          <DailyCardWrapper style={{...styles.shadow}}>
             <DailyCard>
               <DailyInfo>Penjualan hari ini</DailyInfo>
               <DailyTransaksi>Rp.1.000.000</DailyTransaksi>
             </DailyCard>
 
-            <InputTransaksiBtn>
+            <InputTransaksiBtn
+              onPress={() => navigation.navigate('TambahTransaksi')}>
               <InputTransaksiText>+ Transaksi</InputTransaksiText>
             </InputTransaksiBtn>
           </DailyCardWrapper>
@@ -85,31 +73,43 @@ const HomeScreen = ({navigation}) => {
           <ProdukWrapper>
             <ScrollView horizontal style={{top: -20}}>
               {/* overflow: 'visible' */}
-              <ProdukCard stok={10} />
-              <ProdukCard stok={3} />
-              <ProdukCard stok={5} />
-              <ProdukCard stok={1} />
+              {dataProduk.map((datasp, _) => {
+                return (
+                  <ProdukCard
+                    key={_}
+                    stok={datasp.stok}
+                    onPress={() => {
+                      navigation.navigate('TambahStok', {
+                        GetId: datasp.idProduk,
+                        GetNamaProduk: datasp.namaProduk,
+                        GetStok: datasp.stok,
+                      });
+                    }}
+                  />
+                );
+              })}
             </ScrollView>
           </ProdukWrapper>
 
-          <TransaksiCard
-            idTransaksi={123}
-            jumlahTransaksi={1000000}
-            onPress={() => {
-              sheetRef.current.snapTo(140);
-            }}
-          />
-          <TransaksiCard
-            idTransaksi={123}
-            jumlahTransaksi={1000000}
-            onPress={() => {
-              sheetRef.current.snapTo(140);
-            }}
-          />
-          <TransaksiCard idTransaksi={123} jumlahTransaksi={1000000} />
-          <TransaksiCard idTransaksi={123} jumlahTransaksi={1000000} />
-          <TransaksiCard idTransaksi={123} jumlahTransaksi={1000000} />
-          <TransaksiCard idTransaksi={123} jumlahTransaksi={1000000} />
+          {dataTransaksi
+            .filter((datas, index) => index < 5)
+            .sort((a, b) => (b.id > a.id ? 1 : -1))
+            .map((datas, index) => {
+              return (
+                <TransaksiCard
+                  key={index}
+                  idTransaksi={datas.id}
+                  jumlahTransaksi={datas.jumlahPembelian}
+                  onPress={() => {
+                    navigation.navigate('DetailsScreen', {
+                      GetId: datas.id,
+                      GetNamaProduk: datas.namaProduk,
+                      GetJumlahPembelian: datas.jumlahPembelian,
+                    });
+                  }}
+                />
+              );
+            })}
 
           <View
             style={{
@@ -123,6 +123,7 @@ const HomeScreen = ({navigation}) => {
               borderRadius: 10,
               alignItems: 'center',
               justifyContent: 'center',
+              ...styles.shadow,
             }}>
             <TouchableOpacity
               onPress={() => navigation.navigate('Transaksi')}
@@ -149,8 +150,7 @@ const HomeScreen = ({navigation}) => {
       <BottomSheet
         ref={sheetRef}
         initialSnap={0}
-        snapPoints={[0, 70, 190]}
-        borderRadius={10}
+        snapPoints={[0, 0, windowHeight - 300]}
         renderContent={renderContent}
       />
     </Container>
@@ -163,5 +163,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fffecf',
+  },
+  shadow: {
+    shadowColor: 'grey',
+    shadowOffset: {
+      width: 0,
+      height: 20,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
   },
 });

@@ -8,6 +8,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from '../screens/HomeScreen';
 import TransaksiScreen from '../screens/TransaksiScreen';
+import AddStok from '../screens/AddStok';
+import AddTransaksi from '../screens/AddTransaksi';
+import DetailsScreen from '../screens/DetailsScreen';
 import {DrawerContent} from '../screens/DrawerContent';
 
 const HomeStack = createStackNavigator();
@@ -39,6 +42,7 @@ const CustomTabBarButton = ({children, onPress}) => {
 
 const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator
+    initialRouteName={'Beranda'}
     screenOptions={{
       headerStyle: {
         backgroundColor: '#BEECC4',
@@ -68,6 +72,10 @@ const HomeStackScreen = ({navigation}) => (
           </TouchableOpacity>
         ),
       }}
+    />
+    <HomeStack.Screen
+      name="Catatan Transaksi"
+      component={TransaksiStackScreen}
     />
   </HomeStack.Navigator>
 );
@@ -104,6 +112,7 @@ const TabStack = () => (
       name="Beranda"
       component={HomeStackScreen}
       options={{
+        headerTitle: false,
         tabBarIcon: ({focused}) => (
           <View>
             <Image
@@ -149,6 +158,9 @@ const TabStack = () => (
 const AppStack = () => (
   <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
     <Drawer.Screen name="BerandaDrawer" component={TabStack} />
+    <Drawer.Screen name="TambahStok" component={AddStok} />
+    <Drawer.Screen name="DetailsScreen" component={DetailsScreen} />
+    <Drawer.Screen name="TambahTransaksi" component={AddTransaksi} />
   </Drawer.Navigator>
 );
 

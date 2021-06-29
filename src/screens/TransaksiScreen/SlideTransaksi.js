@@ -23,8 +23,11 @@ import Animated, {
   Extrapolate,
 } from 'react-native-reanimated';
 import * as Animatable from 'react-native-animatable';
+import {useNavigation} from '@react-navigation/native';
 
 import TransaksiCard from '../../components/TransaksiCard';
+
+import dataTransaksi from '../../model/dataTransaksi';
 
 import {windowWidth} from '../../utils/Dimentions';
 import {SLIDE_HEIGHT} from '../../utils/SlideHeight';
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
 });
 
 const SlideTransaksi = () => {
+  const navigation = useNavigation();
   return (
     <View style={{flex: 1}}>
       <Animated.View style={{flex: 1}}>
@@ -75,10 +79,25 @@ const SlideTransaksi = () => {
           }}
         />
         <Animated.ScrollView vertical style={{flex: 1}}>
-          <Animatable.View animation="fadeInUpBig" style={{top: 20}}>
-            <TransaksiCard idTransaksi={123} jumlahTransaksi={1000000} />
-            <TransaksiCard idTransaksi={123} jumlahTransaksi={1000000} />
-            <TransaksiCard idTransaksi={123} jumlahTransaksi={1000000} />
+          <Animatable.View
+            animation="fadeInUpBig"
+            style={{top: 20, marginBottom: 10}}>
+            {dataTransaksi
+              .sort((a, b) => (b.id > a.id ? 1 : -1))
+              .map((datas, index) => {
+                if (datas.dateTime == 'hari ini') {
+                  return (
+                    <TransaksiCard
+                      key={index}
+                      idTransaksi={datas.id}
+                      jumlahTransaksi={datas.jumlahPembelian}
+                      onPress={() => {
+                        navigation.navigate('DetailsScreen');
+                      }}
+                    />
+                  );
+                }
+              })}
           </Animatable.View>
         </Animated.ScrollView>
       </Animated.View>

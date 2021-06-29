@@ -1,4 +1,5 @@
 import React from 'react';
+import {StyleSheet} from 'react-native';
 import {
   TransaksiContainer,
   TransaksiDetail,
@@ -19,7 +20,7 @@ const TransaksiCard = ({
   onPress,
 }: TransaksiCardProps) => {
   return (
-    <TransaksiContainer>
+    <TransaksiContainer style={{...styles.shadow}}>
       <TransaksiDetail>
         <TransaksiId>Transaksi: {idTransaksi}</TransaksiId>
         <TransaksiJumlah>Rp. {jumlahTransaksi}</TransaksiJumlah>
@@ -33,3 +34,16 @@ const TransaksiCard = ({
 };
 
 export default TransaksiCard;
+
+const styles = StyleSheet.create({
+  shadow: {
+    shadowColor: 'grey',
+    shadowOffset: {
+      width: 0,
+      height: 20,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
+  },
+});

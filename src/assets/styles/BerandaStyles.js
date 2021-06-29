@@ -73,7 +73,7 @@ export const InputTransaksiText = styled.Text`
 export const ProdukWrapper = styled.View`
   padding-horizontal: 15px;
 `;
-export const ProdukContainer = styled.View`
+export const ProdukContainer = styled.TouchableOpacity`
   flex: 1;
   width: 330px;
   height: 140px;
@@ -81,6 +81,7 @@ export const ProdukContainer = styled.View`
   background-color: #ffffff;
   border-radius: 10px;
   flex-direction: row;
+  margin-vertical: 5px;
 `;
 
 export const ProdukInfoWrapper = styled.View`
@@ -144,7 +145,7 @@ export const TransaksiJumlah = styled.Text`
 
 export const TransaksiDetailBtn = styled.TouchableOpacity`
     top: 20px;
-    left: 160px
+    left: 250px
     width: 80px;
     height: 35px;
     border-width: 1px;
@@ -152,6 +153,7 @@ export const TransaksiDetailBtn = styled.TouchableOpacity`
     border-radius: 8px;
     align-items: center;
     justify-content: center;
+    position: absolute;
 `;
 
 export const TransaksiDetailText = styled.Text`

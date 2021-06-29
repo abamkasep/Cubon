@@ -32,11 +32,11 @@ const LoginScreen = ({navigation}) => {
       <View
         style={{
           flex: 0.2,
-          backgroundColor: '#BFEAF5',
-          borderBottomLeftRadius: 75,
-        }}></View>
+          backgroundColor: 'orange',
+        }}
+      />
       <View style={{flex: 0.8}}>
-        <View style={{flex: 0.8, backgroundColor: '#BFEAF5'}}>
+        <View style={{flex: 0.8, backgroundColor: 'orange'}}>
           <View
             style={{
               flex: 1,
@@ -119,7 +119,7 @@ const LoginScreen = ({navigation}) => {
             </View>
           </View>
         </View>
-        <View style={{flex: 0.2, backgroundColor: '#BFEAF5'}}></View>
+        <View style={{flex: 0.2, backgroundColor: 'orange'}}></View>
       </View>
     </View>
   );
@@ -146,3 +146,5 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
 });
+
+// #BFEAF5

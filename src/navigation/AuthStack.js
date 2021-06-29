@@ -18,7 +18,7 @@ const AuthStack = () => {
   useEffect(() => {
     AsyncStorage.getItem('alreadyLaunched').then(value => {
       if (value == null) {
-        AsyncStorage.setItem('alreadyLaunched', 'true'); // No need to wait for `setItem` to finish, although you might want to handle errors
+        AsyncStorage.setItem('alreadyLaunched', 'null'); // No need to wait for `setItem` to finish, although you might want to handle errors
         setIsFirstLaunch(true);
       } else {
         setIsFirstLaunch(false);

@@ -23,7 +23,7 @@ import {useTheme} from '@react-navigation/native';
 import Slide from './slide';
 import Subslide from './subSlide';
 import Dot from './dot';
-import {windowWidth} from '../../../utils/Dimentions';
+import {windowWidth, windowHeight} from '../../../utils/Dimentions';
 import {SLIDE_HEIGHT} from '../../../utils/SlideHeight';
 
 const BORDER_RADIUS = 75;
@@ -39,7 +39,6 @@ const styles = StyleSheet.create({
   },
   slider: {
     height: SLIDE_HEIGHT,
-    borderBottomRightRadius: BORDER_RADIUS,
   },
   footer: {
     flex: 1,
@@ -47,7 +46,6 @@ const styles = StyleSheet.create({
   footerContent: {
     flex: 1,
     backgroundColor: 'white',
-    borderTopLeftRadius: BORDER_RADIUS,
   },
   pagination: {
     ...StyleSheet.absoluteFillObject,
@@ -60,10 +58,10 @@ const styles = StyleSheet.create({
 
 const slides = [
   {
-    title: 'Relaxed',
-    subtitle: 'Find Your Outfits',
+    title: 'Abon',
+    subtitle: 'Berbagai jenis Abon',
     description:
-      "Confused about your outfit? Don't worry! Find the best outfit here!",
+      'Tidak hanya abon sapi, kita juga menjual berbagai abon seperti abon ayam, abon mujaer dan abon jamur.',
     color: '#BFEAF5',
     picture: {
       //src : require('../../assets/1.png'),
@@ -72,10 +70,10 @@ const slides = [
     },
   },
   {
-    title: 'Playful',
-    subtitle: 'Hear it First, Wear it First',
+    title: 'Dendeng',
+    subtitle: 'Dendeng Sapi',
     description:
-      'Hating the clothes in wardrobe? Explore hundreds of outfit ideas',
+      'Bosan dengan dendeng biasa? Kami mempunyai dendeng rasa yang tak biasa yaitu, dendeng sapi pedas!',
     color: '#BEECC4',
     picture: {
       //src : require('../../assets/1.png'),
@@ -84,10 +82,10 @@ const slides = [
     },
   },
   {
-    title: 'Excentric',
-    subtitle: 'Your Style, Your Way',
+    title: 'Paru Sapi',
+    subtitle: 'Paru Sapi Kering',
     description:
-      'Create your individual & unique style and look amazing everyday',
+      'Paru sapi kering terbaik ditaburi dengan bawang goreng, yang akan menggugah selera. Legit!',
     color: '#FFE4D9',
     picture: {
       //src : require('../../assets/1.png'),
@@ -96,10 +94,10 @@ const slides = [
     },
   },
   {
-    title: 'Funky',
-    subtitle: 'Look Good, Feel Godd',
+    title: 'Oleh Oleh',
+    subtitle: 'Makanan Olahan Sapi',
     description:
-      'Discover the latest trends in fashion and explore your personality',
+      'Tersedia makanan dan cemilan oleh-oleh olahan sapi seperti keripik Sambal rasa Abon Sapi, Gepuk dan lain-lain!',
     color: '#FFDDDD',
     picture: {
       //src : require('../../assets/1.png'),
@@ -114,8 +112,8 @@ const OnboardingScreen = ({navigation}) => {
   const x = useValue(0);
   const onScroll = onScrollEvent({x});
   const backgroundColor = interpolateColor(x, {
-    inputRange: slides.map((_, i) => i * windowWidth), // inputRange: [0, width, width *2, width *3],
-    outputRange: slides.map(Slide => Slide.color), // outputRange: ['#BFEAF5','#BEECC4','#FFE4D9','#FFDDDD'],
+    inputRange: slides.map((_, i) => i * windowWidth),
+    outputRange: slides.map(Slide => Slide.color),
   });
   return (
     <View style={styles.container}>
@@ -157,11 +155,6 @@ const OnboardingScreen = ({navigation}) => {
           {slides.map(({title, picture}, index) => (
             <Slide key={index} right={!!(index % 2)} {...{title, picture}} />
           ))}
-          {/* or you can use this 
-                    <Slide title='Relaxed'/>
-                    <Slide title='Playful' right/>
-                    <Slide title='Excentric'/>
-                    <Slide title='Funky' right/> */}
         </Animated.ScrollView>
       </Animated.View>
       <View style={styles.footer}>
